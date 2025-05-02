@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Класифікація Фруктів</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="importmap">     {
+        "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+    }</script>
+    <script src='./script.js' defer></script>
+    <style>
+        article {
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Класифікація фруктів</h2>
+    <!-- Кнопка відкриття інструкції -->
+        <button onclick="openModal()">Інструкція</button>
+
+        <!-- Модальне вікно -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Інструкція користування</h2>
+                <p>1. Натисніть кнопку <strong>«Навчити модель»</strong>, щоб запустити процес навчання.</p>
+                <p>2. Після завершення навчання введіть характеристики фрукта:</p>
+                <ul>
+                    <li><strong>Вага</strong> — значення у грамах (наприклад, 150)</li>
+                    <li><strong>Колір R, G, B</strong> — значення від 0 до 1</li>
+                    <li><strong>Солодкість</strong> — значення від 0 до 1</li>
+                </ul>
+                <p>3. Натисніть <strong>«Класифікувати»</strong>, щоб отримати результат.</p>
+                <p>4. Ви також можете переглядати графік втрати (loss) під час навчання.</p>
+            </div>
+        </div>
+
+
+    <button onclick="trainModel()"> Навчити модель</button>
+    <p id="status">Статус: очікується запуск...</p>
+
+    <h3>Ввести характеристики фрукта</h3>
+    <input type="number" id="input1" placeholder="Вага (г)">
+    <input type="number" max="1" min="0" id="input2" placeholder="Колір R (0-1)">
+    <input type="number" max="1" min="0" id="input3" placeholder="Колір G (0-1)">
+    <input type="number" max="1" min="0" id="input4" placeholder="Колір B (0-1)">
+    <input type="number" max="1" min="0" id="input5" placeholder="Солодкість (0-1)">
+    <button onclick="predict()"> Класифікувати</button>
+
+    <h3>Результат:</h3>
+    <p id="prediction">Очікується введення...</p>
+
+    <h3>Графік навчання</h3>
+    <canvas id="lossChart"></canvas>
+</body>
+</html>
